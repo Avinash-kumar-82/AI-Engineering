@@ -1,0 +1,21 @@
+[project]
+name = "chain"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Avinash-kumar-82", email = "avinaskumar829114@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]>=0.143.0",
+    "groq>=1.7.0",
+    "python-dotenv>=1.2.4",
+]
+
+[project.scripts]
+chain = "chain:main"
+
+[build-system]
+requires = ["uv_build>=0.12.20,<0.13.0"]
+build-backend = "uv_build"

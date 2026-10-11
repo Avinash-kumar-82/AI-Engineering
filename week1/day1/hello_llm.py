@@ -1,28 +1,38 @@
-import os;
-from pathlib import Path;
-from dotenv import load_dotenv;
-from groq import Groq;
 
-# first thing we have to load env file
-load_dotenv();
+import os
+from dotenv import load_dotenv
+from groq import Groq
 
-# # get api key from env
-grok_api_key=os.getenv("GROK_API_KEY");
+# 1. Load environment variables
+load_dotenv()
 
-if not grok_api_key:
-    raise ValueError("GROK api key not found");
+# 2. Get API key from .env
+groq_api_key = os.getenv("GROQ_API_KEY")
+model = "openai/gpt-oss-20b"
 
-client=Groq(api_key=grok_api_key);
+if not groq_api_key:
+    raise ValueError("GROQ API key not found")
 
-role="user";
-prompt="Do you know Padho with Pratyush";
+# 3. Initialize Groq client
+client = Groq(api_key=groq_api_key)
 
-message={
-    "role":role,
-    "content":prompt
-};
+# 4. Create the user message
+role = "user"
+prompt = "Do you know  Virat?"
 
-messages=[message];
+message = {
+    "role": role,
+    "content": prompt
+}
 
-response=client.chat.completions.create(model=model,messages=message);
-print(response)
+# 5. Create the messages list
+messages = [message]
+
+# 6. Send request to the LLM
+response = client.chat.completions.create(
+    model=model,
+    messages=messages
+)
+
+# 7. Print the generated answer
+print(response.choices[0].message.content)
